@@ -1,10 +1,11 @@
 import devices.Car;
+import devices.Phone;
 public class Main {
     public static void main(String[] args) throws Exception {
         Animal cat = new Animal("europejski",4.0);
         cat.name = "Lucky";
 
-        Car audi = new Car("A3","Audi",10000.0);
+        Car audi = new Car("A3","Audi",10000.0, 2015);
         audi.color = "black";
         audi.transmission = "manual";
 
@@ -17,24 +18,23 @@ public class Main {
         person.setSalary(12000.0);
         person.getSalary();
 
-        Car audi2 = new Car("A3","Audi",10000.0);
+        Car audi2 = new Car("A3","Audi",10000.0, 2015);
         audi2.color = "black";
         audi2.transmission = "manual";
 
-        Car mercedes = new Car("E46","BMW",90000.0);
+        Car mercedes = new Car("E46","BMW",90000.0, 2019);
         mercedes.color = "yellow";
         mercedes.transmission = "automatic";
 
-        System.out.println(cat);
-
-        person.setCar(audi);
-        if(audi.equals(audi2)) System.out.println("rowne sa");
 
 
-        //        if(audi.equals(bmw)) System.out.println("nie sa rowne");
 
+        audi.turnOn();
         System.out.println(audi);
-        System.out.println(audi2);
+        Phone phone = new Phone("Apple","Iphone X",6.2,"IOS",2017);
+        phone.turnOn();
+
+        System.out.println(phone);
 
 
     }
