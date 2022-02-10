@@ -41,4 +41,7 @@ public class Animal {
             System.err.println(walkEx);
         }
     }
+    public String toString() {
+        return name+" "+species+" "+weight;
+    }
 }
