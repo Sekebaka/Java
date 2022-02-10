@@ -3,6 +3,7 @@ public class Car {
     public final String model;
     public String color;
     public String transmission;
+    Double value;
 
     public Car(String producer,String model) {
         this.producer = producer;
