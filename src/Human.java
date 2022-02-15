@@ -1,3 +1,4 @@
+import com.company.creatures.Animal;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 
