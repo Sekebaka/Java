@@ -7,10 +7,11 @@ public  abstract class Car extends Device implements Salleable {
     public String transmission;
     public Double value;
 
-    public Car(String model,String producer,double value,int yearOfProduction){
-        super(model,producer,yearOfProduction);
+    public Car(String model, String producer, int yearOfProduction, double value){
+        super(model,producer,yearOfProduction,value);
         this.model = model;
         this.producer = producer;
+        this.yearOfProduction = yearOfProduction;
         this.value = value;
         @Override
         public void turnOn() {
@@ -47,3 +48,19 @@ public  abstract class Car extends Device implements Salleable {
     }
     public abstract void refuel();
 }
+
+    public void sell(Human seller, Human buyer, Double price) throws Exception{
+        if (!seller.hasCar(this)){
+            throw new Exception("Nie znalezionio auta na sprzedaż");
+        }
+        if (buyer.cash < price){
+            throw new Exception("Nie masz wystarczająco pieniędzy");
+        }
+        if (seller == buyer){
+            throw new Exception("Nie możesz sprzedać sam sobie auta");
+        }
+        buyer.cash -=price;
+        seller.cash += price;
+        buyer.addCar(this);
+        seller.removeCar(this);
+        System.out.println("udało się sprzedać samochód za "+price+ "!");
