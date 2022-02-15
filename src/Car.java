@@ -1,6 +1,6 @@
 package devices;
 import java.util.Objects;
-public class Car extends Device{
+public  abstract class Car extends Device implements Salleable {
     public final String producer;
     public final String model;
     public String color;
@@ -45,4 +45,5 @@ public class Car extends Device{
     public String toString() {
         return value +" "+color+" "+transmission+" " + yearOfProduction;
     }
+    public abstract void refuel();
 }

@@ -1,4 +1,5 @@
 package com.company.devices;
+import com.company.Salleable;
 
 public abstract class Device {
     public final String producer;
