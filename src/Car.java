@@ -1,22 +1,52 @@
 package devices;
 import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 public  abstract class Car extends Device implements Salleable {
     public final String producer;
     public final String model;
     public String color;
     public String transmission;
     public Double value;
+    public List<Human> owners = new ArrayList<>();
 
-    public Car(String model, String producer, int yearOfProduction, double value){
+    public Car(String model, String producer, int yearOfProduction, double value,Human owner){
         super(model,producer,yearOfProduction,value);
         this.model = model;
         this.producer = producer;
         this.yearOfProduction = yearOfProduction;
         this.value = value;
+        owners.add(owner);
+        owner.addCar(this);
+
         @Override
         public void turnOn() {
             System.out.println("Auto włącza się.");
         }
+    }
+    private boolean isHeLastOwner(Human seller){
+        return owners.get(owners.size() - 1).equals(seller);
+    }
+
+    public int carTransactions(){
+        return owners.size() - 1;
+    }
+
+    public boolean hasBeenOwner(Human human){
+        return owners.contains(human);
+    }
+
+    public boolean hasBeenSeller(Human seller, Human buyer) {
+        int index = owners.indexOf(seller);
+        return owners.get(++index).equals(buyer);
+    }
+
+    public boolean soldFromTo(Human seller, Human buyer) {
+        if (hasBeenOwner(seller) && hasBeenOwner(buyer)) {
+            return owners.indexOf(buyer) == owners.indexOf(seller) + 1;
+        }
+
+        return false;
     }
 
     @Override
@@ -59,6 +89,10 @@ public  abstract class Car extends Device implements Salleable {
         if (seller == buyer){
             throw new Exception("Nie możesz sprzedać sam sobie auta");
         }
+        if (!isHeLastOwner(seller)){
+            throw new Exception("Sprzedawca nie jest ostatnim włascicielem");
+        }
+        owners.add(buyer);
         buyer.cash -=price;
         seller.cash += price;
         buyer.addCar(this);

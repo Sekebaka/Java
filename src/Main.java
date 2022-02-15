@@ -2,10 +2,7 @@ import com.company.creatures.Animal;
 import com.company.creatures.Pet;
 import com.company.devices.*;
 import com.company.creatures.FarmAnimal;
-import java.util.ArrayList;
-import java.util.List;
 
-import java.net.URL;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -16,7 +13,7 @@ public class Main {
 
         Human person2 = new Human("Andrzej","Andrzejewicz");
 
-        Car tesla = new Electric("Tesla","1234",2017,80000.0);
+        Car tesla = new Electric("Tesla","1234",2017,80000.0,person);
         tesla.color = "black";
         tesla.transmission = "manual";
 
@@ -24,11 +21,11 @@ public class Main {
 
 
 
-        Car mercedes = new Diesel("Mercedes","C klasa",2012,150000.0);
+        Car mercedes = new Diesel("Mercedes","C klasa",2012,150000.0,person);
         mercedes.color = "yellow";
         mercedes.transmission = "automatic";
 
-        Car audi = new LPG("Audi","A4",2003,3000.0);
+        Car audi = new LPG("Audi","A4",2003,3000.0,person2);
         audi.transmission = "manual";
         audi.color = "red";
 
@@ -38,28 +35,23 @@ public class Main {
 
         tesla.refuel();
 
-        person.setCar(tesla,0);
-        person.setCar(mercedes,1);
-        person.setCar(audi,2);
+        System.out.println("mercedes ilość transakcji: " + mercedes.carTransactions());
+        mercedes.sell(person,person2,1000.0);
+        System.out.println("mercedes ilość transakcji: " + mercedes.carTransactions());
+        System.out.println("Czy byl kiedykolwiek sprzedawca? " + mercedes.hasBeenSeller(person,person2));
+        System.out.println("Czy bylo sprzedane od person1 do person2? " + mercedes.soldFromTo(person2,person));
+        System.out.println("Był kiedykolwiek wlascicielem tesli? " + tesla.hasBeenOwner(person2));
+        mercedes.sell(person2,person,660.0);
+        System.out.println("mercedes ilość transakcji: " + mercedes.carTransactions());
 
 
-        System.out.println("Wartość aut to: " + person.getValue());
-        System.out.println("Sortowanie: " + person.sortCars());
 
-        tesla.sell(person,person2,1000.0);
-        //        person.hasCar(tesla);
 
 
 
         Phone phone = new Phone("Apple","Iphone X",6.2,"IOS",2017,1500.0);
         person.mobilePhone = phone;
-        phone.installAnApp("Facebook");
-        phone.installAnApp("Facebook", "1.0.1");
-        phone.installAnApp("Snapchat", "1.0.2", "snapchat.com");
 
-
-        String[] appList = {"Facebook","Snapchat","Instagram","Messenger"};
-        phone.installAnApp(appList);
 
 
 
